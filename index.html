@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>DEV18 MyIndex</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='css/reset.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header>
+    <img class="gslogo" src="img/g'sacademylogo.jpg" alt="ジーズ">
+    <h1>My Index of DEV 18</h1>
+  </header>
+  <main>
+
+    <!-- 学籍番号が羅列されている箇所 -->
+    <section class="member-id-wrapper">
+    </section>
+    <!-- 学籍番号が羅列されている箇所 -->
+
+    <!-- CAMERA -->
+    <div class="under-display hidden">
+      <div class="camera-nav">
+        <!-- カメラ映像 -->
+        <div class="now-recording">
+          <video id="camera" width="200" height="200" muted></video>
+          <!-- シャッター -->
+          <div id="shutter-inner">
+            <button id="btn-shutter" type="button"><img src="img/camera-solid.svg" width="16" height="16"></button>
+          </div>
+        </div>
+        <div class="saved-image">
+          <canvas id="target" width="200" height="200"></canvas>
+        </div>
+        <audio id="se" preload="auto">
+          <source src="se/camera-shutter1.mp3" type="audio/mp3">
+        </audio>
+      </div>
+        
+      <div class="text-area">
+        <input type="text" id="name" placeholder="呼び名を入力">
+        <textarea id="talk" placeholder="話したこと"></textarea>
+        <ul class="save-and-clear hidden">
+          <li id="save">UP DATE</li>
+          <li id="clear">CLEAR</li>
+          <li id="reset">ALL RESET</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
