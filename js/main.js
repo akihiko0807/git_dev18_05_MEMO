@@ -100,6 +100,7 @@ clickedId = lists.forEach(div => {
     $("section div:" + order).css({fontFamily: 'Bungee Shade'});
     
     if(localStorage.getItem("image" + clickedId)){
+      $("#target").css({opacity: 1});
     var imgdata = localStorage.getItem("image" + clickedId);
     var img = new Image();
     img.onload = function(){
@@ -108,11 +109,11 @@ clickedId = lists.forEach(div => {
     img.src = imgdata;
   } if(!localStorage.getItem("image" + clickedId)) {
     console.log("noimage")
-    var img = new Image();
-    img.onload = function(){
-      ctx.drawImage(img,0,0);
-    }
-    
+    // var img = new Image();
+    // img.onload = function(){
+    //   ctx.clearRect(0, 0);
+    // }
+    $("#target").css({opacity: 0});
   }
     if(localStorage.getItem("name" + clickedId)){
       var namedata = localStorage.getItem("name" + clickedId)
