@@ -1,11 +1,9 @@
-
-var savedId = [];
-var loadSavedData = JSON.parse(localStorage.getItem('savedId'))
+let savedId = [];
+let loadSavedData = JSON.parse(localStorage.getItem('savedId'))
 console.log(loadSavedData);
 if(loadSavedData){
   savedId = loadSavedData;
 }
-
 
 //Save クリックイベント
 $("#save").on("click", function () {
@@ -16,7 +14,7 @@ $("#save").on("click", function () {
   // html側で入力されたデータを取得して確認
   console.log(name)
   console.log(talk)
-  
+
   // データを保存する
   if(name){
     localStorage.setItem("name" + clickedId, name);
@@ -48,33 +46,30 @@ $("#reset").on('click', function () {
   location.reload();
 });
 
-
 const VIDEO = document.querySelector("#camera");    // <video>の要素を取得
 const CANVAS = document.querySelector("canvas");
 const SHUTTER = document.querySelector("#btn-shutter")
 const SE = document.querySelector("#se")
 const ctx = CANVAS.getContext("2d");
-var clickedId;
+let clickedId;
 
 // 学籍番号が並んでいるdivをつくる
-var str = "";
+let str = "";
 for( let i = 1; i <= 51; i++ ){
   str += `<div class="member-id num-${i}">` + i + "</div>";
 }
 $(".member-id-wrapper").html(str);
 
-
 $(function(){
   if(loadSavedData){
   loadSavedData.forEach(function (value) {
     console.log(value);
-    var orderValue = 'nth-child(' + value +')';
+    let orderValue = 'nth-child(' + value +')';
     console.log(orderValue);
     $("section div:" + orderValue).css({background: 'aqua'});
   });
 }
 });
-
 
 // クリックされたメンバーIDが何番なのかを取得する
 // ついでにメンバーIDがクリックされたらビデオの同期が始まる様にする
@@ -89,41 +84,36 @@ clickedId = lists.forEach(div => {
     console.log(clickedId);
     $(".under-display").removeClass('hidden')
     $(".save-and-clear").removeClass('hidden')
-    syncCamera();
     $(".member-id").css({color: '#fff'});
     $(".member-id").css({fontWeight: 'normal'});
     $(".member-id").css({fontFamily: 'sans-serif'});
-    var order = 'nth-child(' + clickedId +')';
+    let order = 'nth-child(' + clickedId +')';
     $("section div:" + order).css({color: 'black'});
     // $("section div:" + order).css({background: 'aqua'});
     $("section div:" + order).css({fontWeight: 'bold'});
     $("section div:" + order).css({fontFamily: 'Bungee Shade'});
-    
+
     if(localStorage.getItem("image" + clickedId)){
       $("#target").css({opacity: 1});
-    var imgdata = localStorage.getItem("image" + clickedId);
-    var img = new Image();
+    let imgdata = localStorage.getItem("image" + clickedId);
+    let img = new Image();
     img.onload = function(){
     ctx.drawImage(img,0,0);
     }
     img.src = imgdata;
   } if(!localStorage.getItem("image" + clickedId)) {
     console.log("noimage")
-    // var img = new Image();
-    // img.onload = function(){
-    //   ctx.clearRect(0, 0);
-    // }
     $("#target").css({opacity: 0});
   }
     if(localStorage.getItem("name" + clickedId)){
-      var namedata = localStorage.getItem("name" + clickedId)
+      let namedata = localStorage.getItem("name" + clickedId)
       $("#name").val(namedata);
     }
     if(!localStorage.getItem("name" + clickedId)){
       $("#name").val("");
     }
     if(localStorage.getItem("talk" + clickedId)){
-      var namedata = localStorage.getItem("talk" + clickedId)
+      let namedata = localStorage.getItem("talk" + clickedId)
       $("#talk").val(namedata);
     }
     if(!localStorage.getItem("talk" + clickedId)){
@@ -132,10 +122,6 @@ clickedId = lists.forEach(div => {
     return clickedId;
   });
 });
-
-if(clickedId){
-  var selectedItem = document.querySelector(`.member-id-wrapper div:nth-child()`);
-}
 
 /** カメラ設定 */
 const CONSTRAINTS = {    // constraintsの意味は「制約」
@@ -164,6 +150,8 @@ function syncCamera(){
   });
 }
 
+window.onload = syncCamera();
+
 // シャッターを押した時の動作が以下
 
 $(function(){
@@ -171,7 +159,7 @@ $(function(){
   // SE再生＆映像停止
   SE.play();
   ctx.drawImage(VIDEO, 0, 0, CANVAS.width, CANVAS.height);
-  var canvasData = CANVAS.toDataURL();
+  let canvasData = CANVAS.toDataURL();
   localStorage.setItem("image"+[clickedId],canvasData);
   });
 });
